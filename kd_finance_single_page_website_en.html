@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="KD-Finance — independent finance advisory by Katharina Dianova." />
+  <title>KD-Finance | Katharina Dianova</title>
+  <style>
+    :root{
+      --navy:#0b1f3a;
+      --navy-2:#102a4d;
+      --gold:#caa24a;
+      --gold-2:#e2c06b;
+      --ink:#0b1220;
+      --muted:#5b677a;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --ring:rgba(202,162,74,.35);
+      --shadow:0 18px 50px rgba(10, 25, 41, .12);
+      --shadow-soft:0 10px 30px rgba(10, 25, 41, .10);
+      --radius:18px;
+      --max:1120px;
+      --header-h:76px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1100px 650px at 85% 10%, rgba(202,162,74,.16), transparent 55%),
+        radial-gradient(900px 500px at 10% 0%, rgba(16,42,77,.10), transparent 55%),
+        linear-gradient(180deg, #ffffff, var(--bg));
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(255,255,255,.82);
+      border-bottom:1px solid rgba(16,42,77,.08);
+      height:var(--header-h);
+    }
+    .header-inner{
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:220px;
+    }
+    .brand-mark{
+      width:52px;
+      height:52px;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(202,162,74,.12), rgba(16,42,77,.06));
+      border:1px solid rgba(16,42,77,.10);
+      box-shadow:0 10px 22px rgba(10,25,41,.08);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .brand-mark img{
+      width:46px;
+      height:46px;
+      object-fit:contain;
+      transform:translateY(1px);
+    }
+    .brand-text strong{display:block; letter-spacing:.2px}
+    .brand-text span{display:block; font-size:12px; color:var(--muted)}
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:8px;
+      border-radius:999px;
+      background:rgba(16,42,77,.04);
+      border:1px solid rgba(16,42,77,.07);
+    }
+    .nav-links a{
+      font-size:14px;
+      color:var(--navy);
+      padding:8px 12px;
+      border-radius:999px;
+      transition:background .15s ease, transform .15s ease;
+    }
+    .nav-links a:hover{
+      background:rgba(202,162,74,.14);
+      transform:translateY(-1px);
+    }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:650;
+      letter-spacing:.2px;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      user-select:none;
+    }
+    .btn-primary{
+      color:#0b1020;
+      background:linear-gradient(180deg, var(--gold-2), var(--gold));
+      box-shadow:0 14px 28px rgba(202,162,74,.22);
+    }
+    .btn-primary:hover{transform:translateY(-1px); box-shadow:0 18px 36px rgba(202,162,74,.30)}
+    .btn-outline{
+      color:var(--navy);
+      background:#fff;
+      border:1px solid rgba(16,42,77,.16);
+      box-shadow:0 10px 20px rgba(10,25,41,.06);
+    }
+    .btn-outline:hover{transform:translateY(-1px)}
+
+    .menu-btn{display:none}
+
+    /* Hero */
+    .hero{padding:52px 0 22px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:28px;
+      align-items:stretch;
+      padding-top:18px;
+    }
+    .hero-card{
+      border-radius:calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.78));
+      border:1px solid rgba(16,42,77,.10);
+      box-shadow:var(--shadow);
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 240px at 15% 15%, rgba(202,162,74,.22), transparent 60%),
+        radial-gradient(520px 240px at 80% 0%, rgba(16,42,77,.20), transparent 60%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .hero-card > *{position:relative}
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(16,42,77,.06);
+      border:1px solid rgba(16,42,77,.10);
+      color:var(--navy);
+      font-size:13px;
+      margin-bottom:16px;
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:linear-gradient(180deg, var(--gold-2), var(--gold));
+      box-shadow:0 0 0 5px rgba(202,162,74,.18);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.08;
+      letter-spacing:-.6px;
+      color:var(--navy);
+    }
+    .hero p{margin:0 0 18px; color:var(--muted); font-size:16px; line-height:1.6; max-width:62ch}
+
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:14px}
+    .trust{
+      margin-top:18px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .trust b{color:var(--navy)}
+
+    .hero-side{
+      border-radius:calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(16,42,77,.92), rgba(11,31,58,.92));
+      color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-side:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 320px at 70% 15%, rgba(202,162,74,.28), transparent 55%),
+        radial-gradient(520px 320px at 0% 100%, rgba(255,255,255,.10), transparent 55%);
+      pointer-events:none;
+      opacity:.95;
+    }
+    .hero-side > *{position:relative}
+    .side-title{font-weight:750; letter-spacing:.2px; margin:0 0 10px; font-size:18px}
+    .side-list{margin:0; padding:0; list-style:none; display:grid; gap:10px}
+    .side-item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+    }
+    .badge{
+      flex:0 0 auto;
+      width:30px;
+      height:30px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, rgba(226,192,107,.92), rgba(202,162,74,.92));
+      color:#0b1020;
+      font-weight:900;
+    }
+    .side-item p{margin:0; color:rgba(255,255,255,.84); font-size:13px; line-height:1.5}
+
+    /* Sections */
+    section{padding:52px 0}
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .section-head h2{margin:0; font-size:28px; letter-spacing:-.3px; color:var(--navy)}
+    .section-head p{margin:0; color:var(--muted); max-width:70ch; line-height:1.6}
+
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .grid-3{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px}
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(16,42,77,.10);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-soft);
+      padding:20px;
+    }
+    .card h3{margin:0 0 8px; color:var(--navy); font-size:16px; letter-spacing:.1px}
+    .card p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(202,162,74,.12);
+      border:1px solid rgba(202,162,74,.18);
+      color:var(--navy);
+      font-size:12px;
+      font-weight:650;
+      margin-bottom:10px;
+    }
+
+    /* About */
+    .about-wrap{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      align-items:start;
+    }
+    .about-photo{
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(16,42,77,.10);
+      background:linear-gradient(180deg, rgba(16,42,77,.08), rgba(202,162,74,.10));
+      box-shadow:var(--shadow-soft);
+      min-height:320px;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+    .about-photo .placeholder{
+      text-align:center;
+      color:var(--muted);
+      max-width:44ch;
+      font-size:14px;
+      line-height:1.6;
+    }
+    .about-photo .placeholder b{color:var(--navy)}
+
+    .highlights{display:grid; gap:12px}
+    .highlight{
+      display:flex;
+      gap:12px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(16,42,77,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.78));
+    }
+    .hl-icon{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      background:rgba(16,42,77,.08);
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(16,42,77,.12);
+      color:var(--navy);
+      font-weight:900;
+    }
+    .highlight p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+    .highlight p b{color:var(--navy)}
+
+    /* Services */
+    .service-card{position:relative; overflow:hidden}
+    .service-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:radial-gradient(420px 220px at 80% 0%, rgba(202,162,74,.16), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .service-card > *{position:relative}
+    .service-meta{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:10px}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(16,42,77,.06);
+      border:1px solid rgba(16,42,77,.10);
+      color:var(--navy);
+      font-weight:650;
+    }
+
+    /* Blog */
+    .blog-card{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .blog-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .date{
+      font-size:12px;
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(16,42,77,.05);
+      border:1px solid rgba(16,42,77,.08);
+    }
+    .blog-card a.read-more{margin-top:auto; display:inline-flex; gap:10px; align-items:center; color:var(--navy); font-weight:700; font-size:13px}
+    .arrow{display:inline-block; transform:translateY(1px)}
+
+    /* CTA */
+    .cta{
+      padding:0 0 64px;
+    }
+    .cta-box{
+      border-radius:calc(var(--radius) + 8px);
+      background:linear-gradient(180deg, rgba(16,42,77,.92), rgba(11,31,58,.92));
+      color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding:26px;
+    }
+    .cta-box:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(620px 340px at 78% 0%, rgba(202,162,74,.32), transparent 60%),
+        radial-gradient(520px 340px at 0% 100%, rgba(255,255,255,.10), transparent 60%);
+      opacity:.95;
+      pointer-events:none;
+    }
+    .cta-box > *{position:relative}
+    .cta-grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:center}
+    .cta-box h2{margin:0 0 8px; font-size:26px; letter-spacing:-.2px}
+    .cta-box p{margin:0; color:rgba(255,255,255,.82); line-height:1.6}
+    .cta-actions{display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap}
+
+    footer{
+      padding:28px 0 34px;
+      color:var(--muted);
+      font-size:13px;
+      border-top:1px solid rgba(16,42,77,.08);
+      background:rgba(255,255,255,.55);
+    }
+    .footer-inner{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; align-items:center}
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(11,18,32,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:100;
+    }
+    .modal{
+      width:min(720px, 100%);
+      background:#fff;
+      border-radius:22px;
+      border:1px solid rgba(16,42,77,.14);
+      box-shadow:0 28px 80px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .modal-header{
+      padding:18px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:linear-gradient(180deg, rgba(16,42,77,.06), rgba(255,255,255,1));
+      border-bottom:1px solid rgba(16,42,77,.10);
+    }
+    .modal-header strong{color:var(--navy)}
+    .x{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      border:1px solid rgba(16,42,77,.16);
+      background:#fff;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:var(--navy);
+    }
+    .modal-body{padding:18px}
+    .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px}
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(16,42,77,.16);
+      outline:none;
+      font:inherit;
+      background:#fff;
+      transition:box-shadow .15s ease, border-color .15s ease;
+    }
+    textarea{min-height:110px; resize:vertical}
+    input:focus, textarea:focus, select:focus{box-shadow:0 0 0 6px var(--ring); border-color:rgba(202,162,74,.55)}
+    .form-actions{display:flex; justify-content:flex-end; gap:12px; margin-top:12px; flex-wrap:wrap}
+    .note{margin-top:10px; font-size:12px; color:var(--muted); line-height:1.6}
+
+    /* Mobile */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr;}
+      .cta-grid{grid-template-columns:1fr;}
+      .cta-actions{justify-content:flex-start}
+      .about-wrap{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:1fr;}
+      .grid-2{grid-template-columns:1fr;}
+      h1{font-size:38px}
+    }
+    @media (max-width: 760px){
+      nav{gap:10px}
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex}
+      .brand{min-width:auto}
+      .header-inner{gap:10px}
+      h1{font-size:34px}
+      .hero-card{padding:26px}
+      .hero-side{padding:22px}
+      .form-grid{grid-template-columns:1fr}
+    }
+
+    /* Simple print */
+    @media print{
+      header, .hero-actions, .cta-actions, .menu-btn, #bookBtn, #bookBtn2, #bookBtn3 { display:none !important; }
+      body{background:#fff}
+      .hero-card, .hero-side, .card, .cta-box{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <!--
+    LOGO INSTRUCTION
+    1) Save the attached logo as:  assets/logo.png
+    2) Keep folder structure:  /assets/logo.png
+    3) If you host on a platform, ensure assets are served.
+  -->
+
+  <header>
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="KD-Finance">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="assets/logo.png" alt="KD-Finance logo" />
+        </div>
+        <div class="brand-text">
+          <strong>KD-Finance</strong>
+          <span>Finance advisory • English</span>
+        </div>
+      </a>
+
+      <nav>
+        <div class="nav-links" aria-label="Primary navigation">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#blog">Blog</a>
+        </div>
+
+        <button class="btn btn-outline menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+        <button class="btn btn-primary" id="bookBtn" type="button">Book your first session</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container hero">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="kicker"><span class="dot" aria-hidden="true"></span>Independent finance advisory for clear decisions</div>
+          <h1>Strategy, structure, and confidence in your financial plan.</h1>
+          <p>
+            KD-Finance supports individuals and families with practical, transparent guidance—focused on goals, risk management, and long‑term resilience.
+            No jargon. No pressure. A structured plan you can act on.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="bookBtn2" type="button">Book your first session</button>
+            <a class="btn btn-outline" href="#services">Explore services</a>
+          </div>
+          <div class="trust">
+            <span><b>Approach:</b> tailored, data‑driven, and compliant</span>
+            <span><b>Format:</b> online or in‑person</span>
+            <span><b>Languages:</b> English / German</span>
+          </div>
+        </div>
+
+        <aside class="hero-side" aria-label="What you get">
+          <p class="side-title">What you can expect</p>
+          <ul class="side-list">
+            <li class="side-item">
+              <div class="badge">1</div>
+              <p><b>First-session clarity:</b> goals, constraints, and a realistic roadmap.</p>
+            </li>
+            <li class="side-item">
+              <div class="badge">2</div>
+              <p><b>Actionable plan:</b> priorities, timelines, and measurable next steps.</p>
+            </li>
+            <li class="side-item">
+              <div class="badge">3</div>
+              <p><b>Ongoing support:</b> reviews, adjustments, and accountability.</p>
+            </li>
+          </ul>
+        </aside>
+      </div>
+
+      <!-- Mobile dropdown nav (simple) -->
+      <div id="mobileNav" class="card" style="display:none; margin-top:14px">
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn btn-outline" href="#about">About</a>
+          <a class="btn btn-outline" href="#services">Services</a>
+          <a class="btn btn-outline" href="#blog">Blog</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>About me</h2>
+            <p>
+              I’m <b>Katharina Dianova</b>, a finance advisor focused on structured planning, risk awareness, and clear decision-making.
+              My work is built on transparency, practical steps, and a long-term view.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-wrap">
+          <div class="about-photo" aria-label="Portrait placeholder">
+            <div class="placeholder">
+              <b>Add a professional portrait here.</b><br/>
+              Replace this block with an image (e.g., assets/katharina.jpg) for stronger trust and conversion.
+            </div>
+          </div>
+
+          <div class="highlights">
+            <div class="highlight">
+              <div class="hl-icon">◎</div>
+              <p><b>Client-first process:</b> define goals, map options, decide with confidence.</p>
+            </div>
+            <div class="highlight">
+              <div class="hl-icon">↗</div>
+              <p><b>Forward-looking planning:</b> align today’s decisions with future milestones.</p>
+            </div>
+            <div class="highlight">
+              <div class="hl-icon">⚖</div>
+              <p><b>Risk and compliance:</b> clear documentation and realistic scenarios.</p>
+            </div>
+            <div class="highlight">
+              <div class="hl-icon">⟡</div>
+              <p><b>Clarity over complexity:</b> practical explanations, no unnecessary jargon.</p>
+            </div>
+
+            <div class="card" style="margin-top:2px">
+              <div class="pill">Typical topics</div>
+              <p>
+                Budget and cashflow structure • emergency fund planning • long-term goal planning • insurance and protection review • savings and investment strategy alignment • life events (moving, family, career transitions)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>My services</h2>
+            <p>Choose a focused session or a longer advisory package. Everything starts with your goals and your timeline.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card service-card">
+            <div class="pill">Session</div>
+            <h3>Financial clarity session (60–90 min)</h3>
+            <p>Define goals, map your current situation, and agree on priorities. You leave with clear next steps.</p>
+            <div class="service-meta">
+              <span class="tag">Best for: getting started</span>
+              <span class="tag">Online / in-person</span>
+            </div>
+          </div>
+
+          <div class="card service-card">
+            <div class="pill">Plan</div>
+            <h3>Personal plan build (2–4 weeks)</h3>
+            <p>Structured plan including cashflow, protection needs, and goal timelines—adapted to your risk profile.</p>
+            <div class="service-meta">
+              <span class="tag">Best for: families</span>
+              <span class="tag">Roadmap + follow-up</span>
+            </div>
+          </div>
+
+          <div class="card service-card">
+            <div class="pill">Review</div>
+            <h3>Annual review & optimisation</h3>
+            <p>Update assumptions, review progress, and rebalance priorities based on life changes and markets.</p>
+            <div class="service-meta">
+              <span class="tag">Best for: staying on track</span>
+              <span class="tag">1–2 meetings/year</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <div class="grid-2">
+            <div>
+              <h3 style="margin:0 0 8px">How we work</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.7">
+                1) Discovery: goals, constraints, and context.<br/>
+                2) Analysis: options, scenarios, trade-offs.<br/>
+                3) Decision: a plan aligned to your priorities.<br/>
+                4) Execution support: check-ins and adjustments.
+              </p>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px">What I need from you</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.7">
+                A short intake form plus key documents (as relevant): income overview, monthly expenses, existing contracts, and financial goals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Blog</h2>
+            <p>Short, practical notes on personal finance decisions. Replace sample posts with real articles.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card blog-card">
+            <div class="blog-top">
+              <div class="pill">Planning</div>
+              <div class="date">Sample</div>
+            </div>
+            <h3>Three steps to a resilient monthly budget</h3>
+            <p>How to structure categories, build buffers, and keep the system simple enough to maintain.</p>
+            <a class="read-more" href="#" onclick="return false;">Read more <span class="arrow">→</span></a>
+          </article>
+
+          <article class="card blog-card">
+            <div class="blog-top">
+              <div class="pill">Risk</div>
+              <div class="date">Sample</div>
+            </div>
+            <h3>Emergency fund: sizing it realistically</h3>
+            <p>A framework to match your cash buffer to stability, dependents, and job risk—without over-saving.</p>
+            <a class="read-more" href="#" onclick="return false;">Read more <span class="arrow">→</span></a>
+          </article>
+
+          <article class="card blog-card">
+            <div class="blog-top">
+              <div class="pill">Investing</div>
+              <div class="date">Sample</div>
+            </div>
+            <h3>Long-term investing: what actually matters</h3>
+            <p>Time horizon, costs, diversification, and behavior—more important than predicting markets.</p>
+            <a class="read-more" href="#" onclick="return false;">Read more <span class="arrow">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-grid">
+            <div>
+              <h2>Ready to start?</h2>
+              <p>Book your first session and get a clear, structured path to your financial goals.</p>
+            </div>
+            <div class="cta-actions">
+              <button class="btn btn-primary" id="bookBtn3" type="button">Book your first session</button>
+              <a class="btn btn-outline" href="#services">See services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <b style="color:var(--navy)">KD-Finance</b> — Katharina Dianova
+      </div>
+      <div>
+        <span style="margin-right:12px">Email: <a href="mailto:hello@kd-finance.example" style="color:var(--navy); font-weight:700">hello@kd-finance.example</a></span>
+        <span>Phone: <a href="tel:+491234567890" style="color:var(--navy); font-weight:700">+49 123 456 7890</a></span>
+      </div>
+      <div>
+        <a href="#" onclick="openModal(); return false;" style="color:var(--navy); font-weight:700">Book a session</a>
+        <span style="margin:0 10px">·</span>
+        <a href="#" onclick="alert('Add your imprint / legal page here.'); return false;" style="color:var(--navy); font-weight:700">Imprint</a>
+        <span style="margin:0 10px">·</span>
+        <a href="#" onclick="alert('Add your privacy policy here.'); return false;" style="color:var(--navy); font-weight:700">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Book a session">
+    <div class="modal">
+      <div class="modal-header">
+        <strong>Book your first session</strong>
+        <button class="x" id="closeModal" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="bookingForm">
+          <div class="form-grid">
+            <div>
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div>
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" type="tel" placeholder="+49 …" />
+            </div>
+            <div>
+              <label for="format">Preferred format</label>
+              <select id="format" name="format" required>
+                <option value="Online">Online</option>
+                <option value="In-person">In-person</option>
+              </select>
+            </div>
+            <div>
+              <label for="topic">Main topic</label>
+              <select id="topic" name="topic" required>
+                <option value="Getting started">Getting started</option>
+                <option value="Budget & cashflow">Budget & cashflow</option>
+                <option value="Protection / insurance">Protection / insurance</option>
+                <option value="Long-term planning">Long-term planning</option>
+                <option value="Review & optimisation">Review & optimisation</option>
+              </select>
+            </div>
+            <div>
+              <label for="time">Preferred time window</label>
+              <select id="time" name="time" required>
+                <option value="Weekdays (morning)">Weekdays (morning)</option>
+                <option value="Weekdays (afternoon)">Weekdays (afternoon)</option>
+                <option value="Weekdays (evening)">Weekdays (evening)</option>
+                <option value="Weekend">Weekend</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="message">Brief message</label>
+            <textarea id="message" name="message" placeholder="A few lines about your goals and context…"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-outline" type="button" id="cancelBtn">Cancel</button>
+            <button class="btn btn-primary" type="submit">Send request</button>
+          </div>
+
+          <div class="note">
+            This is a demo form. Wire it to your email, CRM, or calendar booking tool (e.g., Calendly) in production.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalBackdrop');
+    const closeBtn = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const bookBtns = ['bookBtn','bookBtn2','bookBtn3'].map(id => document.getElementById(id));
+
+    function openModal(){
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('name')?.focus(), 50);
+    }
+    function closeModal(){
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    bookBtns.forEach(b => b && b.addEventListener('click', openModal));
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn?.addEventListener('click', () => {
+      const open = mobileNav.style.display !== 'none';
+      mobileNav.style.display = open ? 'none' : 'block';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Demo submit: build an email draft (replace with your backend / form provider)
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const subject = encodeURIComponent('KD-Finance — Session request');
+      const body = encodeURIComponent(
+        `Name: ${data.name}\n`+
+        `Email: ${data.email}\n`+
+        `Phone: ${data.phone || '-'}\n`+
+        `Format: ${data.format}\n`+
+        `Topic: ${data.topic}\n`+
+        `Time window: ${data.time}\n\n`+
+        `Message:\n${data.message || '-'}\n\n`+
+        `— Sent from kd-finance website`
+      );
+      // Replace email address below with your real address
+      window.location.href = `mailto:hello@kd-finance.example?subject=${subject}&body=${body}`;
+      closeModal();
+    });
+  </script>
+</body>
+</html>
