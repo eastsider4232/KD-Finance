@@ -527,12 +527,12 @@
 
   <header>
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="KD-Finance">
+      <a class="brand" href="#top" aria-label="KD-Investlab">
         <div class="brand-mark" aria-hidden="true">
-          <img src="assets/logo.png" alt="KD-Finance logo" />
+          <img src="assets/logo.png" alt="KD-Investlab logo" />
         </div>
         <div class="brand-text">
-          <strong>KD-Finance</strong>
+          <strong>KD-Investlab</strong>
           <span>Finance advisory • English</span>
         </div>
       </a>
@@ -557,7 +557,7 @@
           <div class="kicker"><span class="dot" aria-hidden="true"></span>Independent finance advisory for clear decisions</div>
           <h1>Strategy, structure, and confidence in your financial plan.</h1>
           <p>
-            KD-Finance supports individuals and families with practical, transparent guidance—focused on goals, risk management, and long‑term resilience.
+            KD-Investlab supports individuals and families with practical, transparent guidance—focused on goals, risk management, and long‑term resilience.
             No jargon. No pressure. A structured plan you can act on.
           </p>
           <div class="hero-actions">
@@ -776,10 +776,10 @@
   <footer>
     <div class="container footer-inner">
       <div>
-        <b style="color:var(--navy)">KD-Finance</b> — Katharina Dianova
+        <b style="color:var(--navy)">KD-Investlab</b> — Katharina Dianova
       </div>
       <div>
-        <span style="margin-right:12px">Email: <a href="mailto:hello@kd-finance.example" style="color:var(--navy); font-weight:700">hello@kd-finance.example</a></span>
+        <span style="margin-right:12px">Email: <a href="mailto:hello@KD-Investlab.example" style="color:var(--navy); font-weight:700">hello@KD-Investlab.example</a></span>
         <span>Phone: <a href="tel:+491234567890" style="color:var(--navy); font-weight:700">+49 123 456 7890</a></span>
       </div>
       <div>
@@ -895,7 +895,7 @@
     document.getElementById('bookingForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(e.target).entries());
-      const subject = encodeURIComponent('KD-Finance — Session request');
+      const subject = encodeURIComponent('KD-Investlab — Session request');
       const body = encodeURIComponent(
         `Name: ${data.name}\n`+
         `Email: ${data.email}\n`+
@@ -904,10 +904,10 @@
         `Topic: ${data.topic}\n`+
         `Time window: ${data.time}\n\n`+
         `Message:\n${data.message || '-'}\n\n`+
-        `— Sent from kd-finance website`
+        `— Sent from KD-Investlab website`
       );
       // Replace email address below with your real address
-      window.location.href = `mailto:hello@kd-finance.example?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:hello@KD-Investlab.example?subject=${subject}&body=${body}`;
       closeModal();
     });
   </script>
