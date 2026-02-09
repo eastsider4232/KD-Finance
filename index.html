@@ -882,5 +882,86 @@
       closeModal();
     });
   </script>
+  <script>
+  // Add/edit posts here (this is your “CMS”)
+  const POSTS = [
+    {
+      title: "Emergency fund: sizing it realistically",
+      date: "2026-02-09",
+      tags: ["Risk", "Planning"],
+      excerpt: "A framework to match your cash buffer to stability, dependents, and job risk—without over-saving.",
+      url: "posts/emergency-fund.html"
+    },
+    {
+      title: "Three steps to a resilient monthly budget",
+      date: "2026-02-01",
+      tags: ["Planning"],
+      excerpt: "How to structure categories, build buffers, and keep the system simple enough to maintain.",
+      url: "posts/budget-resilient.html"
+    },
+    {
+      title: "Long-term investing: what actually matters",
+      date: "2026-02-15",
+      tags: ["Investing"],
+      excerpt: "Time horizon, costs, diversification, and behavior—more important than predicting markets.",
+      url: "posts/long-term-investing.html"
+    }
+  ];
+
+  const blogGrid = document.getElementById("blogGrid");
+  const tagBar = document.getElementById("tagBar");
+  let activeTag = "All";
+
+  function uniqTags(posts) {
+    const s = new Set();
+    posts.forEach(p => (p.tags || []).forEach(t => s.add(t)));
+    return ["All", ...Array.from(s).sort()];
+  }
+
+  function renderTags() {
+    const tags = uniqTags(POSTS);
+    tagBar.innerHTML = tags.map(t => `
+      <button class="btn btn-outline" type="button" data-tag="${t}"
+        style="${t === activeTag ? 'box-shadow:0 0 0 6px var(--ring); border-color:rgba(202,162,74,.55)' : ''}">
+        ${t}
+      </button>
+    `).join("");
+
+    tagBar.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeTag = btn.getAttribute("data-tag");
+        renderTags();
+        renderPosts();
+      });
+    });
+  }
+
+  function renderPosts() {
+    const filtered = activeTag === "All"
+      ? POSTS
+      : POSTS.filter(p => (p.tags || []).includes(activeTag));
+
+    filtered.sort((a,b) => (a.date < b.date ? 1 : -1)); // newest first
+
+    blogGrid.innerHTML = filtered.map(p => `
+      <article class="card blog-card">
+        <div class="blog-top">
+          <div class="pill">${(p.tags && p.tags[0]) ? p.tags[0] : "Blog"}</div>
+          <div class="date">${p.date}</div>
+        </div>
+        <h3>${p.title}</h3>
+        <p>${p.excerpt}</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          ${(p.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}
+        </div>
+        <a class="read-more" href="${p.url}">Read more <span class="arrow">→</span></a>
+      </article>
+    `).join("");
+  }
+
+  renderTags();
+  renderPosts();
+</script>
+
 </body>
 </html>
